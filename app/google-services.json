@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "645743384252",
+    "project_id": "quem-medeve",
+    "storage_bucket": "quem-medeve.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645743384252:android:1c1edf2fa0b61fff4462b9",
+        "android_client_info": {
+          "package_name": "com.ollis.quemdeve_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "645743384252-f0ja1e4jvu6l7218h4ctqnajsj0j38t1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ollis.quemdeve_app",
+            "certificate_hash": "5dd7d5f2c1855de8566e74cacf32025e9a0d460d"
+          }
+        },
+        {
+          "client_id": "645743384252-smfnji43vqsjlmk460emqbi7rf6sblbh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClyql4OOB1oicz5KjtnX3p8rWJ4rnNiII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "645743384252-smfnji43vqsjlmk460emqbi7rf6sblbh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
