@@ -91,7 +91,6 @@ class _AddState extends State<Add> {
                         'pessoa': _personController.text,
                         'desc': _descController.text,
                         'date': _dateController.text,
-                        'imgUrl': url,
                         'Timestamp': FieldValue.serverTimestamp(),
                         'isLend': _isLend
                       };

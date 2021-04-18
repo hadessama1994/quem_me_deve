@@ -9,11 +9,21 @@ import 'package:flutter/material.dart';
 class ItemModel extends Model {
   String userUid;
   bool isLogged;
+  User user;
+
 
   getUserUid() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
     this.userUid = user.uid;
+
+
+  }
+
+  getUserInfo() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User user = auth.currentUser;
+    this.user = user;
   }
 
   checkLogged() async {
@@ -34,47 +44,54 @@ class ItemModel extends Model {
     notifyListeners();
   }
 
-  void insertItems (
+  void insertItems(
       {@required Map<String, dynamic> cardData,
       @required String action,
       @required Timestamp timestamp,
       @required VoidCallback onSuccess,
-      @required VoidCallback onFailure, String docEdit, @required File imageFile})  async {
-
+      @required VoidCallback onFailure,
+      String docEdit,
+      @required File imageFile}) async {
     String url;
+
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
 
-    if (imageFile != null) {
-      UploadTask task = FirebaseStorage.instance
-          .ref()
-          .child(DateTime.now().millisecondsSinceEpoch.toString())
-          .putFile(imageFile);
-      TaskSnapshot taskSnapshot;
-       url = await taskSnapshot.ref.getDownloadURL();
+    sendData() async {
+      await FirebaseFirestore.instance
+          .collection("main")
+          .doc(user.uid)
+          .collection("cards")
+          .doc(docEdit)
+          .set({
+        'valor': cardData["valor"],
+        'pessoa': cardData["pessoa"],
+        'desc': cardData["desc"],
+        'date': cardData["date"],
+        'imgUrl': url,
+        'Timestamp': cardData["Timestamp"],
+        'isLend': cardData["isLend"]
+      });
     }
 
-   await FirebaseFirestore.instance
-        .collection("main")
-        .doc(user.uid)
-        .collection("cards")
-        .doc(docEdit)
-        .set({
-      'valor': cardData["valor"],
-      'pessoa': cardData["pessoa"],
-      'desc': cardData["desc"],
-      'date': cardData["date"],
-      'imgUrl': url,
-      'Timestamp': cardData["Timestamp"],
-      'isLend' : cardData["isLend"]
-    });
-
+    if (imageFile != null) {
+      FirebaseStorage storage = FirebaseStorage.instance;
+      Reference ref =
+          storage.ref().child(DateTime.now().millisecondsSinceEpoch.toString());
+      UploadTask uploadTask = ref.putFile(imageFile);
+      uploadTask.whenComplete(() async {
+        url = await ref.getDownloadURL();
+        sendData();
+      }).catchError((onError) {
+        print(onError);
+      });
+    }
+    else{ sendData();}
     onSuccess();
     onFailure();
   }
 
   void deleteItems(String docID) async {
-
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
 
@@ -86,5 +103,53 @@ class ItemModel extends Model {
         .delete();
   }
 
-  void listItems() {}
+  void editItems(
+      {@required Map<String, dynamic> cardData,
+        @required String action,
+        @required Timestamp timestamp,
+        @required VoidCallback onSuccess,
+        @required VoidCallback onFailure,
+        String docEdit,
+        @required File imageFile}) async {
+    String url;
+
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User user = auth.currentUser;
+
+    sendData() async {
+      print (cardData["isLend"]);
+      await FirebaseFirestore.instance
+          .collection("main")
+          .doc(user.uid)
+          .collection("cards")
+          .doc(docEdit)
+          .set({
+        'valor': cardData["valor"],
+        'pessoa': cardData["pessoa"],
+        'desc': cardData["desc"],
+        'date': cardData["date"],
+        'imgUrl': url,
+        'Timestamp': cardData["Timestamp"],
+        'isLend': cardData["isLend"]
+      });
+    }
+
+    if (imageFile != null) {
+      FirebaseStorage storage = FirebaseStorage.instance;
+      Reference ref =
+      storage.ref().child(DateTime.now().millisecondsSinceEpoch.toString());
+      UploadTask uploadTask = ref.putFile(imageFile);
+      uploadTask.whenComplete(() async {
+        url = await ref.getDownloadURL();
+        sendData();
+      }).catchError((onError) {
+        print(onError);
+      });
+    }
+    else{ sendData();}
+    onSuccess();
+    onFailure();
+  }
+
+
 }

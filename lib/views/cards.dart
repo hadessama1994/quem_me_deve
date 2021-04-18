@@ -86,7 +86,6 @@ class _CardsState extends State<Cards> {
                         }
                         return ListView.builder(
                           itemCount: _itemLength(documents),
-                          //(isMain == false) ? documents.length : 3,
                           itemBuilder: (context, index) {
                             final item = documents[index].id;
                             return Slidable(
@@ -126,6 +125,8 @@ class _CardsState extends State<Cards> {
                                             docID: documents[index].id,
                                             timestamp: documents[index]
                                                 .data()['Timestamp'],
+                                            isLend: documents[index]
+                                                .data()["isLend"],
                                           ),
                                         ),
                                       );
