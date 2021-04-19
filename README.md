@@ -41,18 +41,18 @@ Major Features:
 
 ## Depedencies
 
-  firebase_storage: ^8.0.3
-  firebase_core: ^1.0.3
-  cloud_firestore: ^1.0.5
-  firebase_auth: ^1.1.0
-  flutter_custom_clippers: ^1.1.2
-  datetime_picker_formfield: ^2.0.0
-  image_picker: ^0.7.4
-  contained_tab_bar_view: 0.7.1
-  google_sign_in: ^4.4.4
-  sign_button: ^1.0.2
-  flutter_slidable: ^0.6.0
-  scoped_model: ^1.1.0
+  - firebase_storage: ^8.0.3
+  - firebase_core: ^1.0.3
+  - cloud_firestore: ^1.0.5
+  - firebase_auth: ^1.1.0
+  - flutter_custom_clippers: ^1.1.2
+  - datetime_picker_formfield: ^2.0.0
+  - image_picker: ^0.7.4
+  - contained_tab_bar_view: 0.7.1
+  - google_sign_in: ^4.4.4
+  - sign_button: ^1.0.2
+  - flutter_slidable: ^0.6.0
+  - scoped_model: ^1.1.0
 
 
 ## License
